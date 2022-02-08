@@ -4,8 +4,8 @@ Secured web application backend created with an usage of Java Spring Boot Framew
 * Spring Security <br/>
 * Spring Mail <br/>
 * Spring Data JPA <br/>
+* Spring AOP <br/>
 * Hibernate <br/>
 * Postgresql <br/>
-* Aspectj AOP <br/>
 * Lombok <br/>
 * Maven <br/>
