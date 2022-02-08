@@ -12,4 +12,5 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 public interface BlogCommentRepository extends JpaRepository<BlogComment, Integer> {
 
     Page<BlogComment> findByPostId(Integer post, Pageable pageable);
+    
 }

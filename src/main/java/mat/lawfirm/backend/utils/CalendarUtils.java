@@ -6,11 +6,12 @@ import java.util.Calendar;
 public class  CalendarUtils {
 
     public static String dateFormat = "dd-MM-yyyy HH:mm";
-    private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
+    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
 
-    public static String ConvertMilliSecondsToFormattedDate(Long milliSeconds){
-        Calendar calendar = Calendar.getInstance();
+    public static String ConvertMilliSecondsToFormattedDate(Long milliSeconds) {
+        var calendar = Calendar.getInstance();
         calendar.setTimeInMillis(milliSeconds);
         return simpleDateFormat.format(calendar.getTime());
     }
+
 }

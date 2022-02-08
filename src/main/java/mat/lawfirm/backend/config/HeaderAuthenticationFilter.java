@@ -23,12 +23,10 @@ public class HeaderAuthenticationFilter extends OncePerRequestFilter {
 
     @Value("${spring.authorizationToken}")
     public void setProp(String prop) {
-        System.out.println(prop);
-        this.prop= prop;
+        HeaderAuthenticationFilter.prop = prop;
     }
 
-    public HeaderAuthenticationFilter() {
-    }
+    public HeaderAuthenticationFilter() { }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -36,11 +34,10 @@ public class HeaderAuthenticationFilter extends OncePerRequestFilter {
                                     FilterChain filterChain)
             throws ServletException, IOException {
 
-        String Auth = request.getHeader("Authorization");
+        var Auth = request.getHeader("Authorization");
 
         if (Auth != null && Auth.equals(prop)) {
-            User user = new User(
-                    "admin",
+            var user = new User("admin",
                     "password",
                     true,
                     true,
@@ -48,8 +45,9 @@ public class HeaderAuthenticationFilter extends OncePerRequestFilter {
                     true,
                     Collections.singletonList(new SimpleGrantedAuthority("admin")));
 
-            final UsernamePasswordAuthenticationToken authentication =
-                    new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+            final var authentication = new UsernamePasswordAuthenticationToken(user,
+                    null,
+                    user.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
             filterChain.doFilter(request, response);
@@ -57,5 +55,5 @@ public class HeaderAuthenticationFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
         }
     }
-}
 
+}

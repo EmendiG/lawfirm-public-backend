@@ -11,33 +11,27 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 @ComponentScan
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter
-{
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
-    protected void configure(HttpSecurity security) throws Exception
-    {
-
+    protected void configure(HttpSecurity security) throws Exception {
         security
-            .cors()
+                .cors()
                 .and()
-            .csrf()
-            .disable()
-            .authorizeRequests()
+                .csrf()
+                .disable()
+                .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/blogComments/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/sendMail").permitAll()
-            .and()
-            .addFilterAt(new HeaderAuthenticationFilter(), BasicAuthenticationFilter.class)
-            .authorizeRequests()
+                .and()
+                .addFilterAt(new HeaderAuthenticationFilter(), BasicAuthenticationFilter.class)
+                .authorizeRequests()
                 .antMatchers(HttpMethod.DELETE, "/**").hasAuthority("admin")
                 .antMatchers(HttpMethod.POST, "/**").hasAuthority("admin")
                 .antMatchers(HttpMethod.PUT, "/**").hasAuthority("admin")
-            .and()
+                .and()
                 .httpBasic();
-
     }
-
-
 
 }
