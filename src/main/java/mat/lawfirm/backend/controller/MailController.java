@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MailController {
 
-    private MailService mailService;
+    private final MailService mailService;
 
     @Autowired
     public MailController(MailService mailService) {
@@ -26,7 +26,7 @@ public class MailController {
                        "Numer telefonu :  " + request.getPhoneNumber() + "\n" +
                        "Adres email :     " + request.getEmail() + "\n" +
                        "Czego dotyczy sprawa: \n" + request.getCaseDescription();
-        var calendar = CalendarUtils.ConvertMilliSecondsToFormattedDate(System.currentTimeMillis());
+        var calendar = CalendarUtils.getCurrentTimeStamp();
         mailService.sendMail("Kontakt od " + request.getFullName() + " z dnia " + calendar,
                 mailBody);
         return request;

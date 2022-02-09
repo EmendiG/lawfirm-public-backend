@@ -1,17 +1,15 @@
 package mat.lawfirm.backend.utils;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
-public class  CalendarUtils {
+public class CalendarUtils {
 
-    public static String dateFormat = "dd-MM-yyyy HH:mm";
-    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
+    public static final String DATE_FORMAT = "dd-MM-yyyy HH:mm";
 
-    public static String ConvertMilliSecondsToFormattedDate(Long milliSeconds) {
-        var calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(milliSeconds);
-        return simpleDateFormat.format(calendar.getTime());
+    public static String getCurrentTimeStamp() {
+        return ZonedDateTime.now(ZoneId.of("Europe/Warsaw")).format(DateTimeFormatter.ofPattern(DATE_FORMAT));
     }
 
 }

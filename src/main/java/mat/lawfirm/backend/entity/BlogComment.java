@@ -8,8 +8,8 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="blog_comment")
@@ -19,21 +19,17 @@ public class BlogComment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
     private Integer id;
 
-    @OneToMany(mappedBy="comment",orphanRemoval=true)
-    private List<BlogComment> children = new ArrayList<BlogComment>();
-    @OneToMany(mappedBy="mainComment",orphanRemoval=true)
-    private List<BlogComment> mainChildren = new ArrayList<BlogComment>();
+    @OneToMany(mappedBy="comment", orphanRemoval=true)
+    private Set<BlogComment> children = new HashSet<>();
+    @OneToMany(mappedBy="mainComment", orphanRemoval=true)
+    private Set<BlogComment> mainChildren = new HashSet<>();
 
-    @Column(name="author")
     private String author;
 
-    @Column(name="content")
     private String content;
 
-    @Column(name="comment_time")
     @CreationTimestamp
     private Date commentTime;
 
@@ -41,21 +37,18 @@ public class BlogComment {
     @JoinColumn(name = "blog_id", insertable = false, updatable = false)
     private BlogPost post;
 
-    @Column(name = "blog_id")
     private Integer postId;
 
     @ManyToOne(targetEntity = BlogComment.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "comment_id", insertable = false, updatable = false)
     private BlogComment comment;
 
-    @Column(name = "comment_id")
     private Integer commentId;
 
     @ManyToOne(targetEntity = BlogComment.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "main_parent_id", insertable = false, updatable = false)
     private BlogComment mainComment;
 
-    @Column(name = "main_parent_id")
     private Integer mainCommentId;
 
     @JsonIgnore
