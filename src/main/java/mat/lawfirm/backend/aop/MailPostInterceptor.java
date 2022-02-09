@@ -22,8 +22,12 @@ public class MailPostInterceptor {
     @PersistenceContext
     private EntityManager entityManager;
 
+    private final MailService mailService;
+
     @Autowired
-    private MailService mailService;
+    public MailPostInterceptor(MailService mailService) {
+        this.mailService = mailService;
+    }
 
     @After("execution(* mat.lawfirm.backend.dao.Blog*+.save(*))")
     public void logAction(JoinPoint joinPoint) {
