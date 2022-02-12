@@ -28,7 +28,7 @@ public class MailController {
                        "Czego dotyczy sprawa: \n" + request.getCaseDescription();
         var calendar = CalendarUtils.getCurrentTimeStamp();
         mailService.sendMail("Kontakt od " + request.getFullName() + " z dnia " + calendar,
-                mailBody);
+                             mailBody);
         return request;
     }
 

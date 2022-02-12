@@ -20,7 +20,7 @@ public interface BlogPostRepository extends JpaRepository<BlogPost, Integer> {
             "ORDER BY blog.id DESC")
     Page<BlogPostThumbnail> findRecentThumbnails(Pageable pageable);
 
-    @Query("SELECT  blog.id as id, blog.title as title, blog.category as category, blog.pictureUrl as pictureUrl, " +
+    @Query("SELECT blog.id as id, blog.title as title, blog.category as category, blog.pictureUrl as pictureUrl, " +
             "blog.description as description, blog.postTime as postTime " +
             "FROM BlogPost AS blog " +
             "WHERE blog.category = ?1 " +

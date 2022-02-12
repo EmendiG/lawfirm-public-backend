@@ -11,11 +11,16 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 @Service
 public class MailService {
 
     private final JavaMailSender javaMailSender;
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Value("${spring.deliveryMail}")
     private String deliveryMail;
@@ -34,10 +39,11 @@ public class MailService {
     }
 
     @Async
-    public void sendMail(BlogComment blogComment,
-                         String postTitle,
-                         Integer blogPostId)
+    public void sendMail(BlogComment blogComment)
             throws MessagingException {
+        var blogPost = entityManager.find(BlogPost.class, blogComment.getPostId());
+        var postTitle =  blogPost.getTitle();
+        var blogPostId = blogPost.getId();
         var message = new SimpleMailMessage();
         message.setTo(deliveryMail);
         message.setSubject("Komentarz dodany w \"" + postTitle + "\" przez \"" + blogComment.getAuthor() + "\"");
