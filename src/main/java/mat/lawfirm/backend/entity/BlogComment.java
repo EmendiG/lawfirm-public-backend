@@ -33,19 +33,17 @@ public class BlogComment {
     @CreationTimestamp
     private Date commentTime;
 
-    @ManyToOne(targetEntity = BlogPost.class, fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = BlogPost.class)
     @JoinColumn(name = "blog_id", insertable = false, updatable = false)
     private BlogPost post;
 
     private Integer postId;
 
-    @ManyToOne(targetEntity = BlogComment.class, fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = BlogComment.class)
     @JoinColumn(name = "comment_id", insertable = false, updatable = false)
     private BlogComment comment;
 
-    private Integer commentId;
-
-    @ManyToOne(targetEntity = BlogComment.class, fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = BlogComment.class)
     @JoinColumn(name = "main_parent_id", insertable = false, updatable = false)
     private BlogComment mainComment;
 

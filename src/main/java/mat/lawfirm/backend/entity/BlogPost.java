@@ -39,7 +39,7 @@ public class BlogPost {
 
     private String author;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "post", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<BlogComment> commentIds;
 
 }
