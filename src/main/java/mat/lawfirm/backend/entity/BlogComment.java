@@ -21,9 +21,9 @@ public class BlogComment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToMany(mappedBy="comment", orphanRemoval=true)
+    @OneToMany(mappedBy="comment", orphanRemoval=true, fetch = FetchType.EAGER)
     private Set<BlogComment> children = new HashSet<>();
-    @OneToMany(mappedBy="mainComment", orphanRemoval=true)
+    @OneToMany(mappedBy="mainComment", orphanRemoval=true, fetch = FetchType.EAGER)
     private Set<BlogComment> mainChildren = new HashSet<>();
 
     private String author;
