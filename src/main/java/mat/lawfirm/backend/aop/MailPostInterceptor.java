@@ -23,7 +23,7 @@ public class MailPostInterceptor {
         this.mailService = mailService;
     }
 
-    @AfterReturning(value = "execution(* mat.lawfirm.backend.dao.BlogComment*+.save(*))", returning = "blogComment")
+    @AfterReturning(value = "execution(mat.lawfirm.backend.entity.BlogComment mat.lawfirm.backend.dao.BlogComment*+.save(*))", returning = "blogComment")
     public void logAction(BlogComment blogComment) {
         try {
             mailService.sendMail(blogComment);
@@ -32,7 +32,7 @@ public class MailPostInterceptor {
         }
     }
 
-    @AfterReturning(value = "execution(* mat.lawfirm.backend.dao.BlogPost*+.save(*))", returning = "blogPost")
+    @AfterReturning(value = "execution(mat.lawfirm.backend.entity.BlogPost mat.lawfirm.backend.dao.BlogPost*+.save(*))", returning = "blogPost")
     public void logAction(BlogPost blogPost) {
         try {
             mailService.sendMail(blogPost);

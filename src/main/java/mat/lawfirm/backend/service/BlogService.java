@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.projection.ProjectionFactory;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Set;
 
 @Service
 public class BlogService {
@@ -23,7 +23,7 @@ public class BlogService {
         this.projectionFactory = projectionFactory;
     }
 
-    public List<String> findDistinctPostCategories() {
+    public Set<String> findDistinctPostCategories() {
         return this.repository.findDistinctCategories();
     }
 

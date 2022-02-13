@@ -37,3 +37,4 @@ build/
 application-dev.properties
 /docker/.env
 /src/test/
+/src/main/resources/schema-dev.sql

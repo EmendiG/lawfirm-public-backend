@@ -37,8 +37,6 @@ public class BlogComment {
     @JoinColumn(name = "blog_id", insertable = false, updatable = false)
     private BlogPost post;
 
-    private Integer postId;
-
     @ManyToOne(targetEntity = BlogComment.class)
     @JoinColumn(name = "comment_id", insertable = false, updatable = false)
     private BlogComment comment;
@@ -46,8 +44,6 @@ public class BlogComment {
     @ManyToOne(targetEntity = BlogComment.class)
     @JoinColumn(name = "main_parent_id", insertable = false, updatable = false)
     private BlogComment mainComment;
-
-    private Integer mainCommentId;
 
     @JsonIgnore
     public BlogComment getBlogComment() {

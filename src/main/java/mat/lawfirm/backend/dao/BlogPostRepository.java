@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-import java.util.List;
+import java.util.Set;
 
 @CrossOrigin
 @RepositoryRestResource
@@ -28,6 +28,6 @@ public interface BlogPostRepository extends JpaRepository<BlogPost, Integer> {
     Page<BlogPostThumbnail> findRecentThumbnailsInCategory(String category, Pageable pageable);
 
     @Query("SELECT DISTINCT blog.category FROM BlogPost blog")
-    List<String> findDistinctCategories();
+    Set<String> findDistinctCategories();
 
 }
