@@ -17,21 +17,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity security) throws Exception {
         security
                 .cors()
-                .and()
+                    .and()
                 .csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/blogComments/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/sendMail").permitAll()
+                    .mvcMatchers(HttpMethod.GET, "/**").permitAll()
+                    .mvcMatchers(HttpMethod.POST, "/api/blogComments/**").permitAll()
+                    .mvcMatchers(HttpMethod.POST, "/api/sendMail").permitAll()
                 .and()
                 .addFilterAt(new HeaderAuthenticationFilter(), BasicAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers(HttpMethod.DELETE, "/**").hasAuthority("admin")
-                .antMatchers(HttpMethod.POST, "/**").hasAuthority("admin")
-                .antMatchers(HttpMethod.PUT, "/**").hasAuthority("admin")
+                    .mvcMatchers( "/**").hasAuthority("admin")
                 .and()
-                .httpBasic();
+                    .httpBasic();
     }
 
 }
