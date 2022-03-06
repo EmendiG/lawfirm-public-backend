@@ -1,7 +1,6 @@
 package mat.lawfirm.backend.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -10,12 +9,11 @@ import java.util.Set;
 
 @Entity
 @Table(name="blog_post")
-@Getter
-@Setter
+@Data
 public class BlogPost {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
     private String title;
@@ -39,7 +37,7 @@ public class BlogPost {
 
     private String author;
 
-    @OneToMany(mappedBy = "post", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<BlogComment> commentIds;
 
 }

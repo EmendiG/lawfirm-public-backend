@@ -2,8 +2,7 @@ package mat.lawfirm.backend.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -13,12 +12,11 @@ import java.util.Set;
 
 @Entity
 @Table(name="blog_comment")
-@Getter
-@Setter
+@Data
 public class BlogComment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
     @OneToMany(mappedBy="comment", orphanRemoval=true, fetch = FetchType.EAGER)
@@ -33,7 +31,7 @@ public class BlogComment {
     @CreationTimestamp
     private Date commentTime;
 
-    @ManyToOne(targetEntity = BlogPost.class)
+    @ManyToOne(targetEntity = BlogPost.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "blog_id", insertable = false, updatable = false)
     private BlogPost post;
 
@@ -47,10 +45,7 @@ public class BlogComment {
 
     @JsonIgnore
     public BlogComment getBlogComment() {
-        if (comment != null) {
-            return comment;
-        }
-        return null;
+        return comment;
     }
 
     public int getParentId() {
@@ -62,10 +57,7 @@ public class BlogComment {
 
     @JsonIgnore
     public BlogComment getMainBlogCommment() {
-        if (mainComment != null) {
-            return mainComment;
-        }
-        return null;
+        return mainComment;
     }
 
     public int getMainParentId(){
